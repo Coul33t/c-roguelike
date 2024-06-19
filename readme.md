@@ -1,4 +1,7 @@
-TODO:
+# Roguelike in plain C
+Hey, why not? Using ncurses for displaying to the console, and that's it. everything else is (will) be home-made.
+
+## TODO:
 | Task        | Notes | Status | Finalised          
 | ------------- | ------------- |:-------------:|:-------------:|
 | Basic display      |  | ✓ | ✓
