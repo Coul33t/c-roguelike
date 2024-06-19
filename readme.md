@@ -1,11 +1,11 @@
 TODO:
 | Task        | Notes | Status | Finalised          
 | ------------- | ------------- |:-------------:|:-------------:|
-| Basic display      |  | |
-| Basic entity     |       | |
-| Basic Dungeon |      | |
-| Rendering |      | |
-| Create dungeon |       | |
+| Basic display      |  | ✓ | ✓
+| Basic entity     |       | ✓ | ✓
+| Basic Dungeon |      | ⌛ |
+| Rendering |      |  | 
+| Create dungeon |       | ⌛ |
 | Display dungeon |       | |
 | Move into dungeon | check valid tiles |       |
 | FOV | add tiles colours      | |
