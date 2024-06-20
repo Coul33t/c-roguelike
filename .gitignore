@@ -1,1 +1,9 @@
 build/
+
+# PDCurses on Windows
+extlib/
+
+# IDE specific folders
+.vscode/
+.idea/
+cmake-build-debug-mingw/
