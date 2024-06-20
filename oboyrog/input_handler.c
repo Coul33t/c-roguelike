@@ -1,19 +1,19 @@
 #include "input_handler.h"
 
-void handle_input(char input, struct Entity* player) {
+void handle_input(char input, Entity* player) {
     if (input == 'z') {
-        player->pos.y -= 1;
+        move_entity(player, NORTH);
     }
 
     else if (input == 's') {
-        player->pos.y += 1;
+        move_entity(player, SOUTH);
     }
 
     else if (input == 'd') {
-        player->pos.x += 1;
+        move_entity(player, EAST);
     }
 
     else if (input == 'q') {
-        player->pos.x -= 1;
+        move_entity(player, WEST);
     }
 }

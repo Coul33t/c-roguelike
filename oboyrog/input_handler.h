@@ -3,6 +3,6 @@
 
 #include "entity.h"
 
-void handle_input(char input, struct Entity* player);
+void handle_input(char input, Entity* player);
 
 #endif
