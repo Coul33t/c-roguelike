@@ -14,6 +14,8 @@ endif()
 project(oboyrog C)
 
 set (APP_SRC    oboyrog/main.c
+
+                oboyrog/include_curses.c
              
                 oboyrog/input_handler.c
 

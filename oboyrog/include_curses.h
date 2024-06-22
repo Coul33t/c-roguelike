@@ -6,3 +6,4 @@
     #include <ncurses.h>
 #endif
 
+void put_char(int x, int y, char chr);
