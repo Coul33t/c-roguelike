@@ -1,5 +1,16 @@
 #include "entity.h"
 
+Entity* get_player(int x, int y, char* name) {
+    Entity* player = calloc(1, sizeof(Entity));
+    player->pos.x = x;
+    player->pos.y = y;
+    player->chr = '@';
+    strcpy(player->name, name);
+    player->colour = COLOR_PAIR(VISIBLE_COLOURS);
+
+    return player;
+}
+
 void take_damage(Entity* self, int val) {
         self->stats.hp -= val;
         if (self->stats.hp <= 0) {
