@@ -10,9 +10,10 @@ Tile* get_tile(TILE_TYPE tile_type) {
 }
 
 Tile* get_void() {
-    Tile* tile = calloc(sizeof(Tile), 1);
+    Tile* tile = calloc(1, sizeof(Tile));
     tile->type = VOID;
     tile->chr = ' ';
+    tile->colour = COLOR_PAIR(VISIBLE_COLOURS);
     tile->walkable = false;
     tile->transparent = false;
     tile->visible = false;
@@ -21,9 +22,10 @@ Tile* get_void() {
 }
 
 Tile* get_debug() {
-    Tile* tile = calloc(sizeof(Tile), 1);
+    Tile* tile = calloc(1, sizeof(Tile));
     tile->type = DEBUG;
     tile->chr = 'D';
+    tile->colour = COLOR_PAIR(VISIBLE_COLOURS);
     tile->walkable = false;
     tile->transparent = false;
     tile->visible = false;
@@ -32,9 +34,10 @@ Tile* get_debug() {
 }
 
 Tile* get_wall() {
-    Tile* tile = calloc(sizeof(Tile), 1);
+    Tile* tile = calloc(1, sizeof(Tile));
     tile->type = WALL;
     tile->chr = '#';
+    tile->colour = COLOR_PAIR(VISIBLE_COLOURS);
     tile->walkable = false;
     tile->transparent = false;
     tile->visible = false;
@@ -43,9 +46,10 @@ Tile* get_wall() {
 }
 
 Tile* get_floor() {
-    Tile* tile = calloc(sizeof(Tile), 1);
+    Tile* tile = calloc(1, sizeof(Tile));
     tile->type = FLOOR;
     tile->chr = '.';
+    tile->colour = COLOR_PAIR(VISIBLE_COLOURS);
     tile->walkable = true;
     tile->transparent = true;
     tile->visible = false;
@@ -54,9 +58,10 @@ Tile* get_floor() {
 }
 
 Tile* get_glass() {
-    Tile* tile = calloc(sizeof(Tile), 1);
+    Tile* tile = calloc(1, sizeof(Tile));
     tile->type = GLASS;
     tile->chr = '=';
+    tile->colour = COLOR_PAIR(VISIBLE_COLOURS);
     tile->walkable = false;
     tile->transparent = true;
     tile->visible = false;

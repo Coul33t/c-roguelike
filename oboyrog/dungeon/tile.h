@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include "../include_curses.h"
+#include "../constants.h"
+
 typedef enum {
     DEBUG,
     VOID,
@@ -15,6 +18,7 @@ typedef enum {
 typedef struct Tile {
     TILE_TYPE type;
     char chr;
+    int colour;
     bool walkable;
     bool transparent;
     bool visible;
