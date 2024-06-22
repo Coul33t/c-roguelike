@@ -20,13 +20,13 @@ void close_ncurses_rendering() {
 }
 
 void render_entity(Entity* entity) {
-    mvaddch(entity->pos.y, entity->pos.x, entity->chr);
+    put_char(entity->pos.x, entity->pos.y, entity->chr);
 }
 
 void render_dungeon(Dungeon* dungeon) {
     for (int x = 0; x < DUNGEON_SIZE_X; x++) {
         for (int y = 0; y < DUNGEON_SIZE_Y; y++) {
-            mvaddch(x, y, dungeon->map[(x * DUNGEON_SIZE_Y) + y]->chr);
+            put_char(x, y, dungeon->map[get_1d_idx_from_2d_coord(x, y, DUNGEON_SIZE_Y)]->chr);
         }
     }
 }

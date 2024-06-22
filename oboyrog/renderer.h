@@ -1,9 +1,10 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include "include_ncurses.h"
+#include "include_curses.h"
 #include "entity.h"
 #include "dungeon/dungeon.h"
+
 
 void init_ncurses_rendering();
 void clear_console();
