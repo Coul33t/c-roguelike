@@ -42,6 +42,7 @@ void draw_debug_grid(Dungeon* dungeon, int gap);
 // ----- DUNGEON CREATION -----
 // ----------------------------
 Dungeon* create_empty_dungeon();
+Dungeon* create_wall_dungeon();
 Dungeon* create_basic_dungeon();
 
 void draw_test_lines(Dungeon* dungeon);

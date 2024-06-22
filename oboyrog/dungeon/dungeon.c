@@ -71,17 +71,27 @@ void draw_debug_grid(Dungeon* dungeon, int gap) {
 }
 
 Dungeon* create_empty_dungeon() {
-    Dungeon* dungeon = calloc(sizeof(Dungeon), 1);
+    Dungeon* dungeon = calloc(1, sizeof(Dungeon));
 
     for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
-        dungeon->map[i] = get_void();
+        dungeon->map[i] = get_tile(VOID);
+    }
+
+    return dungeon;
+}
+
+Dungeon* create_wall_dungeon() {
+    Dungeon* dungeon = calloc(1, sizeof(Dungeon));
+
+    for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
+        dungeon->map[i] = get_tile(WALL);
     }
 
     return dungeon;
 }
 
 Dungeon* create_basic_dungeon() {
-    Dungeon* dungeon = calloc(sizeof(Dungeon), 1);
+    Dungeon* dungeon = calloc(1, sizeof(Dungeon));
 
     for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
         dungeon->map[i] = get_void();
