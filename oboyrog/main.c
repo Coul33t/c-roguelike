@@ -1,4 +1,4 @@
-#include "include_ncurses.h"
+#include "include_curses.h"
 #include "entity.h"
 #include "dungeon/dungeon.h"
 #include "input_handler.h"
@@ -11,28 +11,28 @@ int main(void) {
 
     char input = ',';
 
-    Entity player = {{10, 20}, '@', 15};
+    Entity player = {{20, 10}, '@', 15};
     Dungeon* dungeon = create_empty_dungeon();
     //draw_debug_grid(dungeon, 5);
-    draw_room(dungeon, 10, 10, 20, 10);
+    draw_room(dungeon, 20, 10, 20, 10);
+    draw_room(dungeon, 50, 15, 5, 3);
 
-
+    draw_h_corridor(dungeon, 20, 13, 30, 1);
 
     while (input != 'a') {
+
         // Get inputted char with needing to validate with ENTER
         input = getch();
 
-        // Handle user input
-        handle_input(input, &player);
-
-        mvaddch(10, 10, input);
-
         // Copy void character to the whole console
         clear_console();
+        // Handle user input
+        handle_input(input, &player, dungeon);
 
         render_dungeon(dungeon);
-        // Display player
         render_entity(&player);
+
+        mvaddch(1, 1, input);
     }
 
     close_ncurses_rendering();
