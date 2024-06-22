@@ -11,13 +11,14 @@ int main(void) {
 
     char input = ',';
 
-    Entity player = {{20, 10}, '@', 15};
-    Dungeon* dungeon = create_empty_dungeon();
+    Entity* player = get_player(10, 20, "Prout");
+    Dungeon* dungeon = create_wall_dungeon();
     //draw_debug_grid(dungeon, 5);
-    draw_room(dungeon, 20, 10, 20, 10);
+    draw_room(dungeon, 5, 10, 30, 50);
     draw_room(dungeon, 50, 15, 5, 3);
 
-    draw_h_corridor(dungeon, 20, 13, 30, 1);
+    draw_h_corridor(dungeon, 10, 2, 40, 1);
+    draw_h_corridor(dungeon, 10, 15, 40, 1);
 
     while (input != 'a') {
 
@@ -27,10 +28,10 @@ int main(void) {
         // Copy void character to the whole console
         clear_console();
         // Handle user input
-        handle_input(input, &player, dungeon);
+        handle_input(input, player, dungeon);
 
         render_dungeon(dungeon);
-        render_entity(&player);
+        render_entity(player);
 
         mvaddch(1, 1, input);
     }
