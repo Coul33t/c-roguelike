@@ -5,12 +5,15 @@
 #include <stdbool.h>
 
 typedef enum {
+    DEBUG,
+    VOID,
     WALL,
     FLOOR,
-    GLASS
+    GLASS,
 } TILE_TYPE;
 
 typedef struct Tile {
+    TILE_TYPE type;
     char chr;
     bool walkable;
     bool transparent;
