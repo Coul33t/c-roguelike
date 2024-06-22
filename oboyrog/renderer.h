@@ -4,7 +4,7 @@
 #include "include_curses.h"
 #include "entity.h"
 #include "dungeon/dungeon.h"
-
+#include "constants.h"
 
 void init_ncurses_rendering();
 void clear_console();

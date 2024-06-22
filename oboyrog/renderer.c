@@ -9,6 +9,17 @@ void init_ncurses_rendering() {
 
     // Invisible cursor
     curs_set(0);
+
+    if (has_colors()) {
+        start_color();
+
+        init_pair(VISIBLE_COLOURS, COLOR_WHITE, COLOR_BLACK);
+        init_pair(SEEN_COLOURS, COLOR_BLUE, COLOR_BLACK);
+    }
+
+    else {
+        // TODO: print message
+    }
 }
 
 void clear_console() {
