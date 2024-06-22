@@ -7,6 +7,7 @@ typedef enum {
     SOUTH,
     WEST
 } DIRECTION;
+
 typedef struct Position {
     int x;
     int y;
