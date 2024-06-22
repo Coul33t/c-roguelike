@@ -2,6 +2,7 @@
 #define __DUNGEON_H__
 
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "tile.h"
 #include "../comp/position.h"
@@ -20,8 +21,10 @@ typedef struct Dungeon {
 // ---------------------------------
 // ----- DUNGEON ROOM CREATION -----
 // ---------------------------------
-void draw_h_line(Dungeon* dungeon, int x, int y, int w);
-void draw_v_line(Dungeon* dungeon, int x, int y, int h);
+void draw_h_line(Dungeon* dungeon, TILE_TYPE tile_type, int x, int y, int w, bool link_rooms);
+void draw_v_line(Dungeon* dungeon, TILE_TYPE tile_type, int x, int y, int h, bool link_rooms);
+
+void draw_rectangle(Dungeon* dungeon, TILE_TYPE tile_type, int x, int y, int w, int h);
 
 void draw_room(Dungeon* dungeon, int x, int y, int w, int h);
 
@@ -43,5 +46,7 @@ Dungeon* create_basic_dungeon();
 
 void draw_test_lines(Dungeon* dungeon);
 
+Tile* get_dungeon_tile_from_dir(Dungeon* dungeon, DIRECTION dir, int x, int y);
+Tile* get_dungeon_tile(Dungeon* dungeon, int x, int y);
 
 #endif
