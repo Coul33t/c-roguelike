@@ -39,6 +39,15 @@ void draw_room(Dungeon* dungeon, int x, int y, int w, int h) {
     draw_v_line(dungeon, WALL, x + w + 1, y - 1, h + 2, false);
 
     draw_rectangle(dungeon, FLOOR, x, y, w, h);
+    Room* new_room = calloc(1, sizeof(Room));
+    new_room->x1 = x;
+    new_room->y1 = y;
+    new_room->x2 = x + w;
+    new_room->y2 = y + h;
+    new_room->w = w;
+    new_room->h = h;
+    dungeon->rooms[dungeon->nb_of_rooms] = new_room;
+    dungeon->nb_of_rooms++;
 }
 
 void draw_h_corridor(Dungeon* dungeon, int x, int y, int w, int wideness) {
@@ -64,6 +73,7 @@ void draw_debug_grid(Dungeon* dungeon, int gap) {
 
 Dungeon* create_empty_dungeon() {
     Dungeon* dungeon = calloc(1, sizeof(Dungeon));
+    dungeon->nb_of_rooms = 0;
 
     for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
         dungeon->map[i] = get_tile(VOID);
@@ -74,6 +84,7 @@ Dungeon* create_empty_dungeon() {
 
 Dungeon* create_wall_dungeon() {
     Dungeon* dungeon = calloc(1, sizeof(Dungeon));
+    dungeon->nb_of_rooms = 0;
 
     for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
         dungeon->map[i] = get_tile(WALL);
@@ -84,6 +95,7 @@ Dungeon* create_wall_dungeon() {
 
 Dungeon* create_basic_dungeon() {
     Dungeon* dungeon = calloc(1, sizeof(Dungeon));
+    dungeon->nb_of_rooms = 0;
 
     for (int i = 0; i < DUNGEON_SIZE_X * DUNGEON_SIZE_Y; i++) {
         dungeon->map[i] = get_void();
@@ -133,6 +145,11 @@ bool is_in_map(Dungeon* dungeon, int x, int y) {
     }
 
     return false;
+}
+
+Room* get_random_room(Dungeon* dungeon) {
+    int r = rand() % dungeon->nb_of_rooms;
+    return dungeon->rooms[r];
 }
 
 void count_seen_and_visible(Dungeon* dungeon) {

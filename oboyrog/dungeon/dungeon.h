@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 #include "tile.h"
+#include "room.h"
 #include "../comp/position.h"
 #include "../tools.h"
 #include "../constants.h"
@@ -12,6 +13,10 @@
 typedef struct Dungeon {
     // 1D array for a 2D map
     Tile* map[DUNGEON_SIZE_X * DUNGEON_SIZE_Y];
+
+    // 50 rooms at most is enough yo
+    Room* rooms[50];
+    int nb_of_rooms;
 
     Position safe_start_position;
 } Dungeon;
@@ -50,6 +55,9 @@ Tile* get_dungeon_tile(Dungeon* dungeon, int x, int y);
 
 bool is_in_map(Dungeon* dungeon, int x, int y);
 
+Room* get_random_room(Dungeon* dungeon);
+
 void count_seen_and_visible(Dungeon* dungeon);
+
 
 #endif
