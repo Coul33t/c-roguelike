@@ -34,11 +34,11 @@ set (APP_SRC    oboyrog/main.c
 add_executable(oboyrog ${APP_SRC})
 
 if (UNIX)
-    target_link_libraries(oboyrog -lncurses)
+    target_link_libraries(oboyrog -lncurses -lm)
 endif()
 
 if (WIN32)
-    target_link_libraries(oboyrog -lpdcurses)
+    target_link_libraries(oboyrog -lpdcurses -lm)
 endif()
 
 set_property(TARGET oboyrog PROPERTY C_STANDARD 23)
