@@ -6,4 +6,5 @@ extlib/
 # IDE specific folders
 .vscode/
 .idea/
+cmake-build-debug/
 cmake-build-debug-mingw/
