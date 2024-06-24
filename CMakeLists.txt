@@ -1,17 +1,18 @@
 cmake_minimum_required(VERSION 2.6.0)
 
+# here we specify that the project is C language only, so the default
+# C compiler on the system will be used
+project(oboyrog C)
+
 if (UNIX)
     find_package(Curses REQUIRED)
+    include_directories(${CURSES_INCLUDE_DIR})
 endif()
 
 if (WIN32)
     include_directories(../extlib/pdcurses/include/)
     link_directories(../extlib/pdcurses/lib)
 endif()
-
-# here we specify that the project is C language only, so the default
-# C compiler on the system will be used
-project(oboyrog C)
 
 set (APP_SRC    oboyrog/main.c
 
