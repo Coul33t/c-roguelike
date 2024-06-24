@@ -21,14 +21,6 @@ void draw_v_line(Dungeon* dungeon, TILE_TYPE tile_type, int x, int y, int h, boo
         if (!link_rooms) {
             dungeon->map[get_1d_idx_from_2d_coord(x, i, DUNGEON_SIZE_Y)] = get_tile(tile_type);
         }
-
-        else {
-            // TODO: not working as intended
-            if (tile_type == FLOOR ||
-                (tile_type == WALL && dungeon->map[get_1d_idx_from_2d_coord(x, i, DUNGEON_SIZE_Y)]->type != FLOOR)) {
-                dungeon->map[get_1d_idx_from_2d_coord(x, i, DUNGEON_SIZE_Y)] = get_tile(tile_type);
-            }
-        }
     }
 }
 
@@ -133,4 +125,31 @@ Tile* get_dungeon_tile_from_dir(Dungeon* dungeon, DIRECTION dir, int x, int y) {
 
 Tile* get_dungeon_tile(Dungeon* dungeon, int x, int y) {
     return dungeon->map[get_1d_idx_from_2d_coord(x, y, DUNGEON_SIZE_Y)];
+}
+
+bool is_in_map(Dungeon* dungeon, int x, int y) {
+    if (y > 0 && y < DUNGEON_SIZE_Y - 1 && x > 0 && x < DUNGEON_SIZE_X - 1) {
+        return true;
+    }
+
+    return false;
+}
+
+void count_seen_and_visible(Dungeon* dungeon) {
+    int visible_count = 0;
+    int seen_count = 0;
+
+    for (int y = 0; y < DUNGEON_SIZE_Y; y++) {
+        for (int x = 0; x < DUNGEON_SIZE_X; x++) {
+            if (dungeon->map[get_1d_from_2d_dungeon(x, y)]->visible) {
+                visible_count++;
+            }
+
+            if (dungeon->map[get_1d_from_2d_dungeon(x, y)]->seen) {
+                seen_count++;
+            }
+        }
+    }
+    move(1, 5);
+    printw("VISIBLE: %i / SEEN: %i", visible_count, seen_count);
 }

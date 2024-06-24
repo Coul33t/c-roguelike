@@ -7,9 +7,7 @@
 #include "tile.h"
 #include "../comp/position.h"
 #include "../tools.h"
-
-#define DUNGEON_SIZE_X 100
-#define DUNGEON_SIZE_Y 100
+#include "../constants.h"
 
 typedef struct Dungeon {
     // 1D array for a 2D map
@@ -49,5 +47,9 @@ void draw_test_lines(Dungeon* dungeon);
 
 Tile* get_dungeon_tile_from_dir(Dungeon* dungeon, DIRECTION dir, int x, int y);
 Tile* get_dungeon_tile(Dungeon* dungeon, int x, int y);
+
+bool is_in_map(Dungeon* dungeon, int x, int y);
+
+void count_seen_and_visible(Dungeon* dungeon);
 
 #endif

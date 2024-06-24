@@ -5,6 +5,7 @@ Entity* get_player(int x, int y, char* name) {
     player->pos.x = x;
     player->pos.y = y;
     player->chr = '@';
+    player->fov_radius = 10;
     strcpy(player->name, name);
     player->colour = COLOR_PAIR(VISIBLE_COLOURS);
 

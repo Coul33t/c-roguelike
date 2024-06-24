@@ -1,6 +1,14 @@
 #ifndef __CONSTANTS_H__
 #define __CONSTANTS_H__
 
-#define VISIBLE_COLOURS 1
-#define SEEN_COLOURS 2
+#define DEFAULT_COLOURS 1
+#define VISIBLE_COLOURS 2
+#define SEEN_COLOURS 3
+
+#define CONSOLE_X_SIZE 80
+#define CONSOLE_Y_SIZE 24
+
+#define DUNGEON_SIZE_X 100
+#define DUNGEON_SIZE_Y 100
+
 #endif
