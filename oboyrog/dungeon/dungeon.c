@@ -50,13 +50,13 @@ void draw_room(Dungeon* dungeon, int x, int y, int w, int h) {
     dungeon->nb_of_rooms++;
 }
 
-void draw_h_corridor(Dungeon* dungeon, int x, int y, int w, int wideness) {
+void draw_h_corridor(Dungeon* dungeon, int x, int y, int w) {
     draw_h_line(dungeon,  WALL, x, y - 1, w, true);
     draw_h_line(dungeon, FLOOR, x, y    , w, true);
     draw_h_line(dungeon,  WALL, x, y + 1, w, true);
 }
 
-void draw_v_corridor(Dungeon* dungeon, int x, int y, int h, int wideness) {
+void draw_v_corridor(Dungeon* dungeon, int x, int y, int h) {
     draw_v_line(dungeon,  WALL, x - 1, y, h, true);
     draw_v_line(dungeon, FLOOR, x    , y, h, true);
     draw_v_line(dungeon,  WALL, x + 1, y, h, true);
@@ -131,7 +131,7 @@ Tile* get_dungeon_tile_from_dir(Dungeon* dungeon, DIRECTION dir, int x, int y) {
         case SOUTH: return get_dungeon_tile(dungeon, x, y + 1); break;
         case EAST : return get_dungeon_tile(dungeon, x + 1, y); break;
         case WEST : return get_dungeon_tile(dungeon, x - 1, y); break;
-        default: break;
+        default: return get_dungeon_tile(dungeon, x, y); break;
     }
 }
 
@@ -139,7 +139,7 @@ Tile* get_dungeon_tile(Dungeon* dungeon, int x, int y) {
     return dungeon->map[get_1d_idx_from_2d_coord(x, y, DUNGEON_SIZE_Y)];
 }
 
-bool is_in_map(Dungeon* dungeon, int x, int y) {
+bool is_in_map(int x, int y) {
     if (y > 0 && y < DUNGEON_SIZE_Y - 1 && x > 0 && x < DUNGEON_SIZE_X - 1) {
         return true;
     }

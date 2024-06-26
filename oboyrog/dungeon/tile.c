@@ -5,7 +5,8 @@ Tile* get_tile(TILE_TYPE tile_type) {
         case WALL: return get_wall(); break;
         case FLOOR: return get_floor(); break;
         case GLASS: return get_glass(); break;
-        default: break;
+        case VOID: return get_void(); break;
+        default: return get_void(); break;
     }
 }
 
