@@ -8,8 +8,8 @@
 
 #include "comp/position.h"
 
-void handle_input(char input, Entity* player, Dungeon* dungeon);
+void handle_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[]);
 
-void move_if_valid(Entity* entity, DIRECTION dir, Dungeon* dungeon);
+void move_if_valid(Entity* entity, DIRECTION dir, Dungeon* dungeon, Entity* monsters[]);
 
 #endif
