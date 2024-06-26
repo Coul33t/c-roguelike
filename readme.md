@@ -8,14 +8,15 @@ Hey, why not? Using ncurses for displaying to the console, and that's it. everyt
 | Basic entity      |                   |  ✓  | ✓
 | Basic Dungeon     |                   |  ✓  | ⌛
 | Rendering         |                   |  ✓  | 
-| Create dungeon    |                   |  ⌛ |
+| Create dungeon    | TODO: wideness    |  ⌛  |
 | Display dungeon   |                   |  ✓  |
-| Move into dungeon | check valid tiles |  ⌛ |
-| FOV               | add tiles colours |     |
-| Monsters          | should be trivial |     |
-| Stats             |                   |  ⌛ |
-| Basic combat      |                   |     |
+| Move into dungeon | check valid tiles |  ✓  | ⌛
+| FOV               | add tiles colours |  ✓  | ⌛
+| Monsters          | should be trivial |  ✓  |
+| Stats             |                   |  ✓  | ⌛
+| Basic combat      |                   |  ⌛  |
 | Basic AI          |                   |     |
 | Menu-ing          |                   |     |
 | Items             |                   |  ⌛ |
 | Basic Inventory   |                   |     |
+
