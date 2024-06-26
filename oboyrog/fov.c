@@ -1,11 +1,23 @@
 #include "fov.h"
 
-void make_fov(Entity* player, Dungeon* dungeon) {
+void init_fov_map(FOVMap* fov_map) {
+    for (int y = 0; y < DUNGEON_SIZE_Y; y++) {
+        for (int x = 0; x < DUNGEON_SIZE_X; x++) {
+            fov_map->visible_map[get_1d_from_2d_dungeon(x, y)] = false;
+            fov_map->seen_map[get_1d_from_2d_dungeon(x, y)] = false;
+        }
+    }
+}
+
+void make_fov(Entity* player, Dungeon* dungeon, FOVMap* fov_map) {
     int distance;
     Position target;
 
     dungeon->map[get_1d_idx_from_2d_coord(player->pos.x, player->pos.y, DUNGEON_SIZE_Y)]->visible = true;
     dungeon->map[get_1d_idx_from_2d_coord(player->pos.x, player->pos.y, DUNGEON_SIZE_Y)]->seen = true;
+
+    fov_map->visible_map[get_1d_idx_from_2d_coord(player->pos.x, player->pos.y, DUNGEON_SIZE_Y)] = true;
+    fov_map->seen_map[get_1d_idx_from_2d_coord(player->pos.x, player->pos.y, DUNGEON_SIZE_Y)] = true;
 
     for (int y = player->pos.y - player->fov_radius; y < player->pos.y + player->fov_radius; y++) {
         for (int x = player->pos.x - player->fov_radius; x < player->pos.x + player->fov_radius; x++) {
@@ -15,7 +27,9 @@ void make_fov(Entity* player, Dungeon* dungeon) {
             distance = get_distance_from_pos(player->pos, target);
 
             if (distance < player->fov_radius) {
-                if (is_in_map(dungeon, x, y) && line_of_sight(dungeon, player->pos, target)) {
+                if (is_in_map(x, y) && line_of_sight(dungeon, player->pos, target)) {
+                    fov_map->visible_map[get_1d_from_2d_dungeon(x, y)] = true;
+                    fov_map->seen_map[get_1d_from_2d_dungeon(x, y)] = true;
                     dungeon->map[get_1d_from_2d_dungeon(x, y)]->visible = true;
                     dungeon->map[get_1d_from_2d_dungeon(x, y)]->seen = true;
                 }
@@ -24,12 +38,21 @@ void make_fov(Entity* player, Dungeon* dungeon) {
     }
 }
 
-void clear_fov(Entity* player, Dungeon* dungeon) {
+void clear_fov(Dungeon* dungeon, FOVMap* fov_map) {
     for (int y = 0; y < DUNGEON_SIZE_Y; y++) {
         for (int x = 0; x < DUNGEON_SIZE_X; x++) {
             dungeon->map[get_1d_from_2d_dungeon(x, y)]->visible = false;
+            fov_map->visible_map[get_1d_from_2d_dungeon(x, y)] = false;
         }
     }
+}
+
+bool is_visible(Entity* entity, FOVMap* fov_map) {
+    if (fov_map->visible_map[get_1d_from_2d_dungeon(entity->pos.x, entity->pos.y)]) {
+        return true;
+    }
+
+    return false;
 }
 
 bool line_of_sight(Dungeon* dungeon, Position origin, Position target) {
