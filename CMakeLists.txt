@@ -33,6 +33,12 @@ set (APP_SRC    oboyrog/main.c
 
 add_executable(oboyrog ${APP_SRC})
 
+if(MSVC)
+  target_compile_options(oboyrog PRIVATE /W4 /WX)
+else()
+  target_compile_options(oboyrog PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
+
 if (UNIX)
     target_link_libraries(oboyrog -lncurses -lm)
 endif()
