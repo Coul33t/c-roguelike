@@ -14,18 +14,31 @@ int main(void) {
 
     Entity* player = get_player(5, 10, "Prout");
     Dungeon* dungeon = create_wall_dungeon();
+
+    Entity* monsters[NB_MAX_MONSTERS];
+    
+    for (int i = 0; i < NB_MAX_MONSTERS; i++) {
+        monsters[i] = NULL;
+    }
+
+    monsters[0] = get_imp(6, 11);
+    monsters[1] = get_imp(51, 16);
+
     //draw_debug_grid(dungeon, 5);
     draw_room(dungeon, 5, 10, 30, 5);
     draw_room(dungeon, 50, 15, 5, 3);
 
-    draw_h_corridor(dungeon, 10, 2, 40, 1);
-    draw_h_corridor(dungeon, 10, 15, 40, 1);
+    draw_h_corridor(dungeon, 10, 2, 40);
+    draw_h_corridor(dungeon, 10, 15, 40);
 
-    make_fov(player, dungeon);
+    FOVMap* fov_map = calloc(1, sizeof(FOVMap));
+
+    make_fov(player, dungeon, fov_map);
     clear_console();
 
-    render_dungeon(dungeon);
-    render_entity(player);
+    render_dungeon(dungeon, fov_map);
+    render_monsters(monsters, fov_map);
+    render_entity(player, fov_map);
 
     while (input != 'a') {
 
@@ -35,13 +48,14 @@ int main(void) {
         // Copy void character to the whole console
         clear_console();
         // Handle user input
-        handle_input(input, player, dungeon);
+        handle_input(input, player, dungeon, monsters);
 
-        clear_fov(player, dungeon);
-        make_fov(player, dungeon);
+        clear_fov(dungeon, fov_map);
+        make_fov(player, dungeon, fov_map);
 
-        render_dungeon(dungeon);
-        render_entity(player);
+        render_dungeon(dungeon, fov_map);
+        render_monsters(monsters, fov_map);
+        render_entity(player, fov_map);
 
         count_seen_and_visible(dungeon);
 
