@@ -118,10 +118,14 @@ Entity* get_monster_at_tile(Entity* monsters[], DIRECTION dir, int x, int y) {
 }
 
 void take_damage(Entity* self, int val) {
+    int final_damage = val - self->stats.def;
+    
+    if (final_damage > 0) {
         self->stats.hp -= val;
         if (self->stats.hp <= 0) {
             self->is_dead = true;
         }
+    }
 }
 
 void attack(Entity* self, Entity* target) {
