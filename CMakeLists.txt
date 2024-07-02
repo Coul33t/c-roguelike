@@ -25,8 +25,11 @@ set (APP_SRC    oboyrog/main.c
 
                 oboyrog/entity.c
 
+                oboyrog/messages/message.c
+                oboyrog/messages/messages_manager.c
+              
                 oboyrog/renderer.c
-
+                
                 oboyrog/fov.c
 
                 oboyrog/tools.c)
