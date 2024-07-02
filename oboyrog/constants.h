@@ -44,4 +44,6 @@
 
 #define NB_MAX_MONSTERS 100
 
+
+#define MAX_MESSAGES 50
 #endif
