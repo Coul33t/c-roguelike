@@ -8,13 +8,13 @@ typedef enum {
     HANDS,
     LEGS,
     FOOT
-} SLOT;
+} Slot;
 
 typedef struct Item {
     int heal;
     int dmg;
     bool equip;
-    SLOT slot;
+    Slot slot;
     bool usable;
     bool consummable;
     int nb_of_use;
