@@ -8,8 +8,16 @@
 
 #include "comp/position.h"
 
-void handle_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[]);
+#include "messages/messages_manager.h"
 
-void move_if_valid(Entity* entity, DIRECTION dir, Dungeon* dungeon, Entity* monsters[]);
+#include "common.h"
+
+void handle_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[], 
+                  MessagesList* msg_lst, GameState* game_state);
+
+void handle_game_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[],
+                       MessagesList* msg_lst, GameState* game_state);
+
+void move_if_valid(Entity* entity, DIRECTION dir, Dungeon* dungeon, Entity* monsters[], MessagesList* msg_lst);
 
 #endif
