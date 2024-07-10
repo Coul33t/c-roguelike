@@ -7,3 +7,4 @@
 #endif
 
 void put_char(int x, int y, char chr);
+void move_cursor(int x, int y);
