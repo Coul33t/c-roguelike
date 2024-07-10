@@ -138,17 +138,23 @@ int display_message(Message* message, int x, int y) {
 }
 
 void display_messages(MessagesList* msg_lst) {
+
+    if (msg_lst->nb_msgs == 0) {
+        return;
+    }
+
     // TODO: bug, display only one message
     int nb_lines_written = 0;
     int idx = msg_lst->idx;
 
     do {
         nb_lines_written += display_message(msg_lst->msgs[idx], 0, nb_lines_written);
+      
         --idx;
 
         if (idx < 0) {
             if (msg_lst->is_full) {
-                idx = msg_lst->nb_msgs;
+                idx = msg_lst->nb_msgs - 1;
             }
 
             else {
@@ -156,5 +162,5 @@ void display_messages(MessagesList* msg_lst) {
             }            
         }
 
-    } while(nb_lines_written > MESSAGE_BOX_H);
+    } while(nb_lines_written < MESSAGE_BOX_H);
 }

@@ -3,7 +3,7 @@
 MessagesList* get_msgs_lst() {
     MessagesList* msgs_lst = calloc(1, sizeof(MessagesList));
     msgs_lst->is_full = false;
-    msgs_lst->idx = 0;
+    msgs_lst->idx = -1;
     msgs_lst->nb_msgs = 0;
     return msgs_lst;
 }
@@ -20,7 +20,9 @@ void add_msg(MessagesList* msg_lst, char* str) {
     }
 
     msg->size = size;
-    msg->msg = str;
+    msg->msg = calloc(1, msg->size * sizeof(char));
+    strcpy(msg->msg, str);
+    msg_lst->idx++;
 
     // Used in order to erase old messages and free the memory when doing so
     if (msg_lst->idx == MAX_MESSAGES) {
