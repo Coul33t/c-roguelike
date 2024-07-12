@@ -41,8 +41,7 @@ void move_if_valid(Entity* entity, DIRECTION dir, Dungeon* dungeon, Entity* mons
 
         // If there's a monster alive, we attack it
         else if (check_if_tile_has_monster(monsters, dir, entity->pos.x, entity->pos.y, true)) {
-            attack(entity, get_monster_at_tile(monsters, dir, entity->pos.x, entity->pos.y));
-            add_msg(msg_lst, "You attack!");
+            attack(entity, get_monster_at_tile(monsters, dir, entity->pos.x, entity->pos.y), msg_lst);
         }
         
     }
