@@ -34,10 +34,10 @@
 #define MESSAGE_BOX_W 60 
 #define MESSAGE_BOX_H 4
 
-#define STATS_X 60
-#define STATS_Y 0
-#define STATS_W 20 
-#define STATS_H 24
+#define STATS_PANEL_X 60
+#define STATS_PANEL_Y 0
+#define STATS_PANEL_W 20 
+#define STATS_PANEL_H 24
 // ------------------------
 
 #define BASE_FOV 15
