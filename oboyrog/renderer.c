@@ -111,6 +111,39 @@ void render_dungeon(Dungeon* dungeon, FOVMap* fov_map) {
     attron(COLOR_PAIR(DEFAULT_COLOURS));
 }
 
+void render_stats_panel(Entity* player, Entity* target) {
+    /*for (int x = STATS_PANEL_X; x < STATS_PANEL_X + STATS_PANEL_W; x++) {
+        for (int y = STATS_PANEL_Y; y < STATS_PANEL_Y  + STATS_PANEL_H; y++) {
+            put_char(x, y, 'X');
+        }
+    }*/
+
+    for (int y = STATS_PANEL_Y; y < STATS_PANEL_Y  + STATS_PANEL_H; y++) {
+        put_char(STATS_PANEL_X, y, '|');
+    }
+
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 1);
+    printw("%s", player->name);
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 2);
+    printw(" HP: %i / %i", player->stats.hp, player->stats.hp_max);
+
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 3);
+    printw("STM: %i / %i", player->stats.stamina, player->stats.stamina_max);
+
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 4);
+    printw("DMG: %i", player->stats.dmg);
+
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 5);
+    printw("DEF: %i", player->stats.def);
+
+    move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 6);
+    printw(" XP: %i", player->stats.xp);
+
+    if (target) {
+        // Display info about target
+    }
+}
+
 int display_message(Message* message, int x, int y) {
     int nb_lines = 1;
     int current_x = x;
