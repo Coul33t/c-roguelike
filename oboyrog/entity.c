@@ -11,9 +11,11 @@ Entity* get_player(int x, int y, char* name) {
 
     // Stats
     player->stats.hp = 100;
+    player->stats.hp_max = 100;
     player->stats.dmg = 3;
     player->stats.def = 2;
     player->stats.stamina = 100;
+    player->stats.stamina_max = 100;
     player->stats.xp = 0;
     player->stats.xp_value = 0;
     // -----
