@@ -64,6 +64,7 @@ int main(void) {
         render_dungeon(dungeon, fov_map);
         render_monsters(monsters, fov_map);
         render_entity(player, fov_map);
+        render_stats_panel(player, NULL);
 
         display_messages(msg_lst);
 
