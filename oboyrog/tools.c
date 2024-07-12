@@ -18,3 +18,13 @@ float get_distance_from_coords(int x1, int y1, int x2, int y2) {
 float get_distance_from_pos(Position origin, Position target) {
     return get_distance_from_coords(origin.x, origin.y, target.x, target.y);
 }
+
+int get_str_size(char* str) {
+    int idx = 0;
+
+    while (str[idx] != '\0') {
+        idx++;
+    }
+
+    return idx;
+}
