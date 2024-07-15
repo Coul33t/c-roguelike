@@ -10,7 +10,7 @@
 #include "../comp/position.h"
 
 #include "../messages/messages_manager.h"
-
+#include "../targeting_list.h"
 #include "../common.h"
 
 void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
