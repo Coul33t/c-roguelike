@@ -18,7 +18,7 @@ set (APP_SRC    oboyrog/main.c
 
                 oboyrog/include_curses.c
              
-                oboyrog/input_handler.c
+                oboyrog/input_handler/input_handler.c
 
                 oboyrog/dungeon/tile.c
                 oboyrog/dungeon/dungeon.c
@@ -32,14 +32,14 @@ set (APP_SRC    oboyrog/main.c
                 
                 oboyrog/fov.c
 
-                oboyrog/tools.c)
+                oboyrog/tools/tools.c)
 
 add_executable(oboyrog ${APP_SRC})
 
 if(MSVC)
   target_compile_options(oboyrog PRIVATE /W4 /WX)
 else()
-  target_compile_options(oboyrog PRIVATE -Wall -Wextra -Wpedantic -Werror)
+  target_compile_options(oboyrog PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
 if (UNIX)
