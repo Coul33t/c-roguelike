@@ -1,7 +1,7 @@
 #include "include_curses.h"
 #include "entity.h"
 #include "dungeon/dungeon.h"
-#include "input_handler.h"
+#include "input_handler/input_handler.h"
 #include "renderer.h"
 #include "fov.h"
 #include "common.h"
@@ -11,18 +11,25 @@ int main(void) {
 
     init_ncurses_rendering();
 
-    char input = ',';
+    int input = ',';
 
     Entity* player = get_player(5, 10, "Prout");
     Dungeon* dungeon = create_wall_dungeon();
 
+    // Array that stores all monsters
     Entity* monsters[NB_MAX_MONSTERS];
 
-    GameState game_state = MENU;
-    
+    // Init everything to NULL (is that useful?)
     for (int i = 0; i < NB_MAX_MONSTERS; i++) {
         monsters[i] = NULL;
     }
+
+    // Array that stores all valid targets (can't be bigger than NB_MAX_MONSTERS)
+    Entity* targeting_list[NB_MAX_MONSTERS];
+
+    GameState game_state = MENU;
+    
+    
 
     monsters[0] = get_imp(6, 11);
     monsters[1] = get_imp(51, 16);
@@ -56,7 +63,7 @@ int main(void) {
         clear_console();
 
         // Handle user input
-        handle_input(input, player, dungeon, monsters, msg_lst, &game_state);
+        handle_input(input, player, dungeon, fov_map, monsters, targeting_list, msg_lst, &game_state);
 
         clear_fov(dungeon, fov_map);
         make_fov(player, dungeon, fov_map);
