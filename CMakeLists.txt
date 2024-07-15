@@ -32,6 +32,8 @@ set (APP_SRC    oboyrog/main.c
                 
                 oboyrog/fov.c
 
+                oboyrog/targeting_list.c
+
                 oboyrog/tools/tools.c)
 
 add_executable(oboyrog ${APP_SRC})
