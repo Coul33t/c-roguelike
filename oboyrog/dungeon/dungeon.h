@@ -7,7 +7,7 @@
 #include "tile.h"
 #include "room.h"
 #include "../comp/position.h"
-#include "../tools.h"
+#include "../tools/tools.h"
 #include "../constants.h"
 
 typedef struct Dungeon {
