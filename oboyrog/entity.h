@@ -14,7 +14,7 @@
 
 #include "constants.h"
 
-#include "tools.h"
+#include "tools/tools.h"
 
 typedef struct Entity {
     Position pos;
@@ -48,5 +48,12 @@ bool take_damage(Entity* self, int val);
 // Returns true if target is dead
 void attack(Entity* self, Entity* target, MessagesList* msg_lst);
 void move_entity(Entity* self, DIRECTION direction);
+
+
+float get_distance_from_entities(Entity* e1, Entity* e2);
+void sort_entities_array_by_dst(Entity* array[], Entity* player);
+
+void swap_entities(Entity* ent_1, Entity* ent_2);
+void swap_entities_by_idx(Entity* a[], int idx_1, int idx_2);
 
 #endif
