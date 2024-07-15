@@ -11,7 +11,7 @@ int get_1d_idx_from_2d_coord(int x, int y, int w);
 int get_1d_from_2d_dungeon(int x, int y);
 float get_distance_from_coords(int x1, int y1, int x2, int y2);
 float get_distance_from_pos(Position origin, Position target);
-
+int get_str_size(char* str);
 
 void sort_entities_array_by_dst(Entity* array[], Entity* player);
 

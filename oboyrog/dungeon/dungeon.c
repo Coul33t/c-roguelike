@@ -167,6 +167,6 @@ void count_seen_and_visible(Dungeon* dungeon) {
             }
         }
     }
-    move(1, 5);
+    move_cursor(5, 1);
     printw("VISIBLE: %i / SEEN: %i", visible_count, seen_count);
 }

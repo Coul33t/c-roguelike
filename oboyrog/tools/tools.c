@@ -23,6 +23,16 @@ float get_distance_from_entities(Entity* e1, Entity* e2) {
     return get_distance_from_pos(e1->pos, e2->pos);
 }
 
+int get_str_size(char* str) {
+    int idx = 0;
+
+    while (str[idx] != '\0') {
+        idx++;
+    }
+
+    return idx;
+}
+
 void sort_entities_array_by_dst(Entity* array[], Entity* player) {
     int current_smallest_idx;
     float current_smallest_dst;

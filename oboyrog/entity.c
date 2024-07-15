@@ -11,9 +11,13 @@ Entity* get_player(int x, int y, char* name) {
 
     // Stats
     player->stats.hp = 100;
+    player->stats.hp_max = 100;
     player->stats.dmg = 3;
     player->stats.def = 2;
     player->stats.stamina = 100;
+    player->stats.stamina_max = 100;
+    player->stats.xp = 0;
+    player->stats.xp_value = 0;
     // -----
 
     player->colour = COLOR_PAIR(VISIBLE_COLOURS);
@@ -24,11 +28,15 @@ Entity* get_player(int x, int y, char* name) {
     return player;
 }
 
-Entity* get_monster(int x, int y, char* name, char chr, char dead_chr, Stats* stats, int fov_radius, int colour, int dead_colour) {
+Entity* get_monster(int x, int y, char* name, char chr, char dead_chr, Stats* stats, int fov_radius, 
+                    int colour, int dead_colour) {
+    
     Entity* monster = calloc(1, sizeof(Entity));
+    
     monster->pos.x = x;
     monster->pos.y = y;
     strcpy(monster->name, name);
+
     monster->chr = chr;
     monster->dead_chr = dead_chr;
 
@@ -38,9 +46,12 @@ Entity* get_monster(int x, int y, char* name, char chr, char dead_chr, Stats* st
     monster->dead_colour = dead_colour;
 
     monster->stats.hp = stats->hp;
+    monster->stats.hp_max = stats->hp;
     monster->stats.dmg = stats->dmg;
     monster->stats.def = stats->def;
     monster->stats.stamina = stats->stamina;
+    monster->stats.stamina_max = stats->stamina;
+    monster->stats.xp_value = stats->xp_value;
 
     monster->seen_once = false;
 
@@ -53,6 +64,7 @@ Entity* get_imp(int x, int y) {
     stats.dmg = 1;
     stats.def = 0;
     stats.stamina = 10;
+    stats.xp_value = 5;
 
     return get_monster(x, y, "Imp", 'i', '%', &stats, BASE_FOV, COLOR_PAIR(YELLOW_FG_COLOUR), COLOR_PAIR(RED_FG_COLOUR));
 }
@@ -117,19 +129,39 @@ Entity* get_monster_at_tile(Entity* monsters[], DIRECTION dir, int x, int y) {
     return NULL;
 }
 
-void take_damage(Entity* self, int val) {
+bool take_damage(Entity* self, int val) {
     int final_damage = val - self->stats.def;
     
     if (final_damage > 0) {
         self->stats.hp -= val;
         if (self->stats.hp <= 0) {
             self->is_dead = true;
+            return true;
         }
     }
+
+    return false;
 }
 
-void attack(Entity* self, Entity* target) {
-    take_damage(target, self->stats.dmg);
+void attack(Entity* self, Entity* target, MessagesList* msg_lst) {
+    bool result = take_damage(target, self->stats.dmg);
+
+    if (result) {
+        self->stats.xp += target->stats.xp_value;
+        // +1 probably for the termination char? Idk
+        int buffer_size = 13 + get_str_size(target->name) + 1;
+        char str_buffer[buffer_size];
+        snprintf(str_buffer, buffer_size, "You kill the %s", target->name);
+        add_msg(msg_lst, str_buffer);
+    }
+
+    else {
+        // +1 probably for the termination char? Idk
+        int buffer_size = 15 + get_str_size(target->name) + 1;
+        char str_buffer[buffer_size];
+        snprintf(str_buffer, buffer_size, "You attack the %s", target->name);
+        add_msg(msg_lst, str_buffer);
+    }
 }
 
 void move_entity(Entity* self, DIRECTION direction) {
