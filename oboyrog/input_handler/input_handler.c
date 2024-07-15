@@ -1,14 +1,20 @@
 #include "input_handler.h"
 
-void handle_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[], 
+void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list, 
                   MessagesList* msg_lst, GameState* game_state) {
     switch (*game_state) {
-        case GAME: handle_game_input(input, player, dungeon, monsters, msg_lst, game_state); break;
+        case GAME: 
+            handle_game_input(input, player, dungeon, monsters, msg_lst, game_state); 
+            break;
+        case TARGETING: 
+            handle_targeting_input(input, player, dungeon, fov_map, monsters, targeting_list, msg_lst, game_state); 
+            // TODO: add sorting once
+            break;
         default: break;
     }
 }
 
-void handle_game_input(char input, Entity* player, Dungeon* dungeon, Entity* monsters[],
+void handle_game_input(int input, Entity* player, Dungeon* dungeon, Entity* monsters[],
                        MessagesList* msg_lst, GameState* game_state) {
     if (input == 'z') {
         move_if_valid(player, NORTH, dungeon, monsters, msg_lst);
@@ -28,6 +34,21 @@ void handle_game_input(char input, Entity* player, Dungeon* dungeon, Entity* mon
 
     else if (input == 'i') {
         *game_state = INVENTORY;
+    }
+
+    else if (input == 'f') {
+        *game_state = TARGETING;
+    }
+}
+
+void handle_targeting_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
+                            MessagesList* msg_lst, GameState* game_state) {
+    if (input == 'c') {
+        *game_state = GAME;
+    }
+
+    if (input == KEY_STAB) {
+        next_target(targeting_list);
     }
 }
 
