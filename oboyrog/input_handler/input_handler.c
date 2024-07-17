@@ -6,10 +6,17 @@ void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, 
         case GAME: 
             handle_game_input(input, player, dungeon, monsters, msg_lst, game_state); 
             break;
-        case TARGETING: 
+
+        case TARGETING:
+            if (!targeting_list->is_ordered) {
+                get_visible_entities(targeting_list, monsters, fov_map);
+                sort_entities_array_by_dst(targeting_list->lst, player);
+                targeting_list->is_ordered = true;
+            }
+
             handle_targeting_input(input, player, dungeon, fov_map, monsters, targeting_list, msg_lst, game_state); 
-            // TODO: add sorting once
             break;
+
         default: break;
     }
 }
@@ -44,6 +51,7 @@ void handle_game_input(int input, Entity* player, Dungeon* dungeon, Entity* mons
 void handle_targeting_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
                             MessagesList* msg_lst, GameState* game_state) {
     if (input == 'c') {
+        targeting_list->is_ordered = false;
         *game_state = GAME;
     }
 

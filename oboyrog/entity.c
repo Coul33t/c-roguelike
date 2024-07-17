@@ -197,6 +197,11 @@ void sort_entities_array_by_dst(Entity* array[], Entity* player) {
         // For each monster after the current one, check if there's a closer one
         // if there's a closer one, mark it as the new closest one
         for (int j = i + 1; j < NB_MAX_MONSTERS; j++) {
+            // We've reach the last monster of the list, so everything before is ordered
+            if (array[j] == NULL) {
+                return;
+            }
+
             dst = get_distance_from_entities(player, array[j]);
             if (dst < current_smallest_dst) {
                 current_smallest_dst = dst;
