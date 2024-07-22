@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6.0)
+cmake_minimum_required(VERSION 2.8.12)
 
 # here we specify that the project is C language only, so the default
 # C compiler on the system will be used
