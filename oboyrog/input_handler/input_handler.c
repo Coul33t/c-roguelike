@@ -4,16 +4,10 @@ void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, 
                   MessagesList* msg_lst, GameState* game_state) {
     switch (*game_state) {
         case GAME: 
-            handle_game_input(input, player, dungeon, monsters, msg_lst, game_state); 
+            handle_game_input(input, player, dungeon, fov_map, monsters, targeting_list, msg_lst, game_state); 
             break;
 
         case TARGETING:
-            if (!targeting_list->is_ordered) {
-                get_visible_entities(targeting_list, monsters, fov_map);
-                sort_entities_array_by_dst(targeting_list->lst, player);
-                targeting_list->is_ordered = true;
-            }
-
             handle_targeting_input(input, player, dungeon, fov_map, monsters, targeting_list, msg_lst, game_state); 
             break;
 
@@ -21,7 +15,7 @@ void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, 
     }
 }
 
-void handle_game_input(int input, Entity* player, Dungeon* dungeon, Entity* monsters[],
+void handle_game_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
                        MessagesList* msg_lst, GameState* game_state) {
     if (input == 'z') {
         move_if_valid(player, NORTH, dungeon, monsters, msg_lst);
@@ -45,18 +39,30 @@ void handle_game_input(int input, Entity* player, Dungeon* dungeon, Entity* mons
 
     else if (input == 'f') {
         *game_state = TARGETING;
+
+        if (!targeting_list->is_ordered) {
+            get_visible_entities(targeting_list, monsters, fov_map);
+            sort_entities_array_by_dst(targeting_list->lst, player);
+            targeting_list->is_ordered = true;
+        }
     }
 }
 
 void handle_targeting_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
                             MessagesList* msg_lst, GameState* game_state) {
     if (input == 'c') {
-        targeting_list->is_ordered = false;
+        clean_targeting_list(targeting_list);
         *game_state = GAME;
     }
 
     if (input == KEY_STAB) {
         next_target(targeting_list);
+    }
+
+    // if zqsd: move target to the tile
+
+    if (input == 'f') {
+        // FIRE
     }
 }
 

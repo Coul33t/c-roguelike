@@ -16,7 +16,7 @@
 void handle_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
                   MessagesList* msg_lst, GameState* game_state);
 
-void handle_game_input(int input, Entity* player, Dungeon* dungeon, Entity* monsters[],
+void handle_game_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,
                        MessagesList* msg_lst, GameState* game_state);
 
 void handle_targeting_input(int input, Entity* player, Dungeon* dungeon, FOVMap* fov_map, Entity* monsters[], TargetingList* targeting_list,

@@ -25,7 +25,7 @@ int main(void) {
     }
 
     // Array that stores all valid targets (can't be bigger than NB_MAX_MONSTERS)
-    Entity* targeting_list[NB_MAX_MONSTERS];
+    Entity* targeting_list = get_empty_targeting_list();
 
     GameState game_state = MENU;
     
@@ -72,6 +72,10 @@ int main(void) {
         render_monsters(monsters, fov_map);
         render_entity(player, fov_map);
         render_stats_panel(player, NULL);
+
+        if (game_state == TARGETING && !is_empty(targeting_list)) {
+            draw_line(player, get_targeted(targeting_list));
+        }
 
         display_messages(msg_lst);
 

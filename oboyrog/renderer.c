@@ -144,6 +144,28 @@ void render_stats_panel(Entity* player, Entity* target) {
     }
 }
 
+void draw_line(Entity* src, Entity* target) {
+    Position current_pos = src->pos;
+    int tmp_x, tmp_y;
+    float coef = abs((float)(target->pos.x - src->pos.x)  / (float)(abs(target->pos.y - src->pos.y) + 1));
+    int nb = 0;
+
+    while (current_pos.x != target->pos.x) {
+        tmp_x = target->pos.x - current_pos.x;
+
+        // normalise and keep the sign
+        if (coef != 0 && nb > coef) {
+            current_pos.y += (target->pos.y - current_pos.y) / abs(target->pos.y - current_pos.y);
+            nb = 0;
+        } 
+        
+        current_pos.x += tmp_x / abs(tmp_x);
+
+        put_char(current_pos.x, current_pos.y, 'X');
+        ++nb;
+    }
+}
+
 int display_message(Message* message, int x, int y) {
     int nb_lines = 1;
     int current_x = x;

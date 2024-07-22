@@ -18,6 +18,8 @@ typedef struct TargetingList {
 TargetingList* get_empty_targeting_list();
 void get_visible_entities(TargetingList* lst, Entity* monsters[], FOVMap* fov_map);
 void next_target(TargetingList* target_lst);
+Entity* get_targeted(TargetingList* lst);
 void clean_targeting_list(TargetingList* lst);
+bool is_empty(TargetingList* target_lst);
 
 #endif

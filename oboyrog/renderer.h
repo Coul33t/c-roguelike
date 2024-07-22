@@ -17,6 +17,8 @@ void render_monsters(Entity* monsters[], FOVMap* fov_map);
 void render_dungeon(Dungeon* dungeon, FOVMap* fov_map);
 void render_stats_panel(Entity* player, Entity* target);
 
+void draw_line(Entity* src, Entity* target);
+
 // return the number of lines it took to display the message
 int display_message(Message* message, int x, int y);
 void display_messages(MessagesList* msg_lst);

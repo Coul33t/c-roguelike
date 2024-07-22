@@ -30,8 +30,18 @@ void next_target(TargetingList* target_lst) {
     }
 }
 
+Entity* get_targeted(TargetingList* lst) {
+    return lst->lst[lst->current_idx];
+}
+
 void clean_targeting_list(TargetingList* lst) {
     for (int i = 0; i < NB_MAX_MONSTERS; i++) {
         lst->lst[i] = NULL; // Don't free, the monsters aren't dead
     }
+
+    lst->is_ordered = false;
+}
+
+bool is_empty(TargetingList* target_lst) {
+    return (target_lst->lst[0] == NULL);
 }
