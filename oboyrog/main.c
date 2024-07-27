@@ -25,7 +25,7 @@ int main(void) {
     }
 
     // Array that stores all valid targets (can't be bigger than NB_MAX_MONSTERS)
-    Entity* targeting_list = get_empty_targeting_list();
+    TargetingList* targeting_list = get_empty_targeting_list();
 
     GameState game_state = MENU;
     
