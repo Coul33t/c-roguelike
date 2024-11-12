@@ -146,8 +146,8 @@ void render_stats_panel(Entity* player, Entity* target) {
 
 void draw_line(Entity* src, Entity* target) {
     Position current_pos = src->pos;
-    int tmp_x, tmp_y;
-    float coef = abs((float)(target->pos.x - src->pos.x)  / (float)(abs(target->pos.y - src->pos.y) + 1));
+    int tmp_x;
+    float coef = fabs((float)(target->pos.x - src->pos.x)  / (float)(abs(target->pos.y - src->pos.y) + 1));
     int nb = 0;
 
     while (current_pos.x != target->pos.x) {
