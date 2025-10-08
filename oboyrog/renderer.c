@@ -125,10 +125,10 @@ void render_stats_panel(Entity* player, Entity* target) {
     move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 1);
     printw("%s", player->name);
     move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 2);
-    printw(" HP: %i / %i", player->stats.hp, player->stats.hp_max);
+    printw(" HP: %i / %i", player->stats.hp.val, player->stats.hp.max);
 
     move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 3);
-    printw("STM: %i / %i", player->stats.stamina, player->stats.stamina_max);
+    printw("STM: %i / %i", player->stats.stamina.val, player->stats.stamina.max);
 
     move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 4);
     printw("DMG: %i", player->stats.dmg);
@@ -140,6 +140,8 @@ void render_stats_panel(Entity* player, Entity* target) {
     printw(" XP: %i", player->stats.xp);
 
     if (target) {
+        move_cursor(STATS_PANEL_X + 2, STATS_PANEL_Y + 7);
+        printw("----------");
         // Display info about target
     }
 }

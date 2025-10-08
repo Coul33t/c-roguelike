@@ -1,10 +1,14 @@
+typedef struct SingleStat {
+    char name[30];
+    int max, val;
+} SingleStat;
+
 typedef struct Stats {
-    int hp;
-    int hp_max;
+    SingleStat hp;
+    SingleStat stamina;
+    SingleStat mana;
     int dmg;
     int def;
-    int stamina;
-    int stamina_max;
     int xp;
     int xp_value;
 } Stats;

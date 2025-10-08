@@ -10,12 +10,12 @@ Entity* get_player(int x, int y, char* name) {
     strcpy(player->name, name);
 
     // Stats
-    player->stats.hp = 100;
-    player->stats.hp_max = 100;
+    player->stats.hp.val = 100;
+    player->stats.hp.max = 100;
     player->stats.dmg = 3;
     player->stats.def = 2;
-    player->stats.stamina = 100;
-    player->stats.stamina_max = 100;
+    player->stats.stamina.val = 100;
+    player->stats.stamina.max = 100;
     player->stats.xp = 0;
     player->stats.xp_value = 0;
     // -----
@@ -45,12 +45,12 @@ Entity* get_monster(int x, int y, char* name, char chr, char dead_chr, Stats* st
     monster->colour = colour;
     monster->dead_colour = dead_colour;
 
-    monster->stats.hp = stats->hp;
-    monster->stats.hp_max = stats->hp;
+    monster->stats.hp.val = stats->hp.val;
+    monster->stats.hp.max = stats->hp.max;
     monster->stats.dmg = stats->dmg;
     monster->stats.def = stats->def;
-    monster->stats.stamina = stats->stamina;
-    monster->stats.stamina_max = stats->stamina;
+    monster->stats.stamina.val = stats->stamina.val;
+    monster->stats.stamina.max = stats->stamina.max;
     monster->stats.xp_value = stats->xp_value;
 
     monster->seen_once = false;
@@ -60,10 +60,12 @@ Entity* get_monster(int x, int y, char* name, char chr, char dead_chr, Stats* st
 
 Entity* get_imp(int x, int y) {
     Stats stats;
-    stats.hp = 5;
+    stats.hp.val = 5;
+    stats.hp.max = 5;
     stats.dmg = 1;
     stats.def = 0;
-    stats.stamina = 10;
+    stats.stamina.val = 10;
+    stats.stamina.max = 10;
     stats.xp_value = 5;
 
     return get_monster(x, y, "Imp", 'i', '%', &stats, BASE_FOV, COLOR_PAIR(YELLOW_FG_COLOUR), COLOR_PAIR(RED_FG_COLOUR));
@@ -133,8 +135,8 @@ bool take_damage(Entity* self, int val) {
     int final_damage = val - self->stats.def;
     
     if (final_damage > 0) {
-        self->stats.hp -= val;
-        if (self->stats.hp <= 0) {
+        self->stats.hp.val -= val;
+        if (self->stats.hp.val <= 0) {
             self->is_dead = true;
             return true;
         }
@@ -145,6 +147,8 @@ bool take_damage(Entity* self, int val) {
 
 void attack(Entity* self, Entity* target, MessagesList* msg_lst) {
     bool result = take_damage(target, self->stats.dmg);
+
+    self->target = target;
 
     if (result) {
         self->stats.xp += target->stats.xp_value;

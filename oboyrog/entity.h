@@ -31,6 +31,8 @@ typedef struct Entity {
 
     Stats stats;
     bool is_dead;
+
+    struct Entity* target;
 } Entity;
 
 Entity* get_player(int x, int y, char* name);
