@@ -32,7 +32,7 @@ void init_ncurses_rendering() {
 }
 
 void clear_console() {
-    clear();
+    erase();
 }
 
 void close_ncurses_rendering() {

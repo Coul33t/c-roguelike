@@ -29,7 +29,7 @@ int main(void) {
 
     GameState game_state = MENU;
     
-    
+    MessagesList* msg_lst = get_msgs_lst();    
 
     monsters[0] = get_imp(6, 11);
     monsters[1] = get_imp(51, 16);
@@ -49,8 +49,9 @@ int main(void) {
     render_dungeon(dungeon, fov_map);
     render_monsters(monsters, fov_map);
     render_entity(player, fov_map);
-
-    MessagesList* msg_lst = get_msgs_lst();
+    render_stats_panel(player, nullptr);
+    display_messages(msg_lst);
+    count_seen_and_visible(dungeon);
 
     game_state = GAME;
 
